@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--pag45=k)k-w*(wj5l33hdyq$tob(8@u722)_=1124sgb*997o'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -147,8 +147,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_SES_REGION_NAME = 'ca-central-1'
 AWS_SES_REGION_ENDPOINT = 'email.ca-central-1.amazonaws.com'
-AWS_ACCESS_KEY_ID = 'AKIA6FXM7WR73JBMLYK4'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 
 DEFAULT_FROM_NAME = "Nebulous Tech"
 DEFAULT_FROM_EMAIL = "discount@nebulous.tech"

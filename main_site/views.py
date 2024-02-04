@@ -72,14 +72,15 @@ def contact(request):
                 instance.ip_address = get_ip(request)
                 instance.save()
 
+                body = "Name: " + form.cleaned_data['name'] + '\n' + "Email: " + form.cleaned_data['email'] + '\n' + "Content: " + form.cleaned_data['content']
                 send_mail(
                     "Feedback from: " + form.cleaned_data['email'],
-                    form.cleaned_data['content'],
-                    'feedback@nebulous.tech',
-                    ['lucassimone99@gmail.com'],
+                    body,
+                    'newmessage@nebulous.tech',
+                    ['lucas.simone.careers@gmail.com'],
                 )
 
-                messages.success(request, f'Your feedback has been recived and we will get back to you as soon as possible. Thank you for helping us improve.')
+                messages.success(request, f'Your message has been recived and I will get back to you as soon as possible. Thanks looking forward to connecting with you. - Lucas')
                 return redirect('site-contact')
             else:
                 context['form'] = form
