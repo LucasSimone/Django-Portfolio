@@ -1,0 +1,54 @@
+
+{% extends "main_site/master.html"%}
+{% block content %}
+    <h1 class="mt-3 gradient-header">Ever wondered what information can be gathered from your Ip adress?</h1>
+
+    <p>Below you can see some of the info that can be gathered from your IP address, just from browsing the web.</p>
+
+    {% if ip_info %}
+        <div class="mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex"><h3 class="uppercase gradient-header">Country -&nbsp;</h3><h3>{{ ip_info.country }}</h3></div>
+                    <p class="mb-4">The country you are located in. This is 95% - 99% accurate.</p>
+
+                    <div class="d-flex"><h3 class="uppercase gradient-header">Region -&nbsp;</h3> <h3>{{ ip_info.regionName }}</h3></div>
+                    <p class="mb-4">The region you are located in. This is 55% - 80% accurate.</p>
+
+                    <div class="d-flex"><h3 class="uppercase gradient-header">City -&nbsp;</h3> <h3>{{ ip_info.city }}</h3></div>
+                    <p class="mb-4">The city you are located in. This is 50% - 75% accurate.</p>
+
+                    <div class="d-flex"><h3 class="uppercase gradient-header">District -&nbsp;</h3> <h3>{{ ip_info.district }}</h3></div>
+                    <p class="mb-4">The district you are located in. If your city is broken up into districts. There may not be a value here.</p>
+
+                    <div class="d-flex"><h3 class="uppercase gradient-header">Zip Code -&nbsp;</h3> <h3>{{ ip_info.zip }}</h3></div>
+                    <p class="mb-4">The closest approximation to your ZIP code.</p>
+
+                    <div class="d-flex"><h3 class="uppercase gradient-header">Latitude -&nbsp;</h3> <h3>{{ ip_info.lat }}</h3></div>
+                    <p class="mb-4">Your estimated latitude.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex"><h3 class="uppercase gradient-header">Longitude -&nbsp;</h3> <h3>{{ ip_info.lon }}</h3></div>
+                    <p class="mb-4">Your estimated longitude.</p>
+        
+                    <div class="d-lg-flex d-md-block d-sm-flex"><h3 class="uppercase gradient-header">Timezone -&nbsp;</h3> <h3>{{ ip_info.timezone }}</h3></div>
+                    <p class="mb-4">Your current timezone.</p>
+        
+                    <div class="d-xl-flex"><h3 class="uppercase gradient-header">Internet provider(ISP) -&nbsp;</h3> <h3>{{ ip_info.isp }}</h3></div>
+                    <p class="mb-4">Your current internet service provider.</p>
+        
+                    <div class="d-flex"><h3 class="uppercase gradient-header">On Mobile Device -&nbsp;</h3> <h3>{{ ip_info.mobile }}</h3></div>
+                    <p class="mb-4">Whether you are on a mobile device.</p>
+        
+                    <div class="d-flex"><h3 class="uppercase gradient-header">Using a Proxy -&nbsp;</h3> <h3>{{ ip_info.proxy }}</h3></div>
+                    <p class="mb-4">If you are using a Proxy, VPN or Tor exit address.</p>
+                </div>
+            </div>
+
+            <p class="mt-4">For more information and the source of the accuracy stated above visit <a href="https://www.iplocation.net/geolocation-accuracy" target="_blank">https://www.iplocation.net/geolocation-accuracy</a> </p>
+        </div>
+    {% else %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+
+{% endblock content %}

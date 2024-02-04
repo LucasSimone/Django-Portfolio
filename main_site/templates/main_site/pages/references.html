@@ -1,0 +1,11 @@
+
+{% extends "main_site/master.html"%}
+{% block content %}
+    <h1>References Page</h1>
+    {% for testimonial in testimonials %}
+        <h2>{{ testimonial.name }}</h2>
+        <h3>{{ testimonial.description }}</h3>
+        <p>{{ testimonial.content }}</p>
+        <p>{{ testimonial.date }}</p>
+    {% endfor %}
+{% endblock content %}

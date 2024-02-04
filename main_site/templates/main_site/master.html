@@ -1,0 +1,63 @@
+<html data-bs-theme="dark">
+    <head>
+
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+        <!-- Title -->
+        {% if title %}
+        <title>Main Site - {{title}}</title>
+        {% else %}
+        <title>Main Site</title>
+        {% endif %}
+
+        <!-- Include -->
+        {% include 'main_site/include/head.html' %} 
+
+    </head>
+
+    <body>
+
+        {% include 'main_site/include/color_wipe.html' %}
+
+
+        {% include 'main_site/include/header.html' %} 
+
+
+        <div class="container body-wrapper">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert">
+                        {{  message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+
+            {% include 'main_site/include/theme_picker.html' %} 
+            
+        </div>
+
+  
+        {% include 'main_site/include/footer.html' %} 
+
+
+        {% include 'main_site/include/scripts.html' %}
+
+    </body>
+
+    {% if anchor %}
+        <script>
+            console.log("REDIRECT")
+            $(document).ready(function(){
+                window.location = '#{{ anchor }}'
+            });
+        </script>
+    {% endif %}
+
+</html>
