@@ -80,7 +80,7 @@ def contact(request):
                     ['lucas.simone.careers@gmail.com'],
                 )
 
-                messages.success(request, f'Your message has been recived and I will get back to you as soon as possible. Thanks looking forward to connecting with you. - Lucas')
+                messages.success(request, f"Your message has been recived and I will get back to you as soon as possible. Thank you, I'm looking forward to connecting with you. - Lucas")
                 return redirect('site-contact')
             else:
                 context['form'] = form
