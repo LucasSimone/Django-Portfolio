@@ -1,5 +1,13 @@
 $( document ).ready(function() {
 
+    // Clear the wipe class after half a second
+    setTimeout(function(){
+        if(sessionStorage.getItem("play-intro") != null) {
+            $('.color-wipe').addClass('d-none');
+        }
+        $('.color-wipe').removeClass('color-wipe-out');
+    },500);
+
     // Check if we need to wipe away transition
     if(sessionStorage.getItem("wipe-out") == 'true'){
         color_wipe_out();
@@ -9,12 +17,10 @@ $( document ).ready(function() {
     $('a.active').removeClass('active').removeAttr('aria-current');
     $('a[href="' + location.pathname + '"]').closest('a').addClass('active').attr('aria-current', 'page'); 
 
-    // Set min page height
-    let min_height = window.innerHeight - $('footer').outerHeight(true) - $('.navbar').outerHeight(true);
-    console.log(window.innerHeight);
-    console.log($('footer').outerHeight(true));
-    console.log($('.navbar').outerHeight(true));
-    $('.body-wrapper').css("min-height", min_height + 'px' );
+    
+    setMinPageHeight();
+    placeThemePicker();
+    
 
     // CLICKS
 
@@ -35,6 +41,10 @@ $( document ).ready(function() {
         color_wipe_in();
 
         setTimeout(h_direct, 500, this.href);
+    });
+
+    $('#play_intro').click(function(e){
+        play_intro();
     });
 
 });
@@ -60,10 +70,21 @@ window.addEventListener('pageshow', (event) => {
     }
 });
 
+// On scroll
+window.addEventListener('scroll', (event) => {
+    placeThemePicker();
+});
+
+// On window.addEventListener('resize', (event) => {
+window.addEventListener('resize', (event) => {
+    placeThemePicker();
+    setMinPageHeight();
+});
+
 
 
 // Check if we should play Intro
-if(sessionStorage.getItem("play-intro") == 'true' || sessionStorage.getItem("play-intro") == null){
+if(sessionStorage.getItem("play-intro") == null){
     play_intro();
 }
 
@@ -73,9 +94,10 @@ function play_intro(){
     console.log("INTRO")
     // Anim setup
     $('.color-wipe').css('width', '100vw');
+    $('.intro-box').removeClass('d-none');
+    $('.color-wipe').removeClass('d-none');
 
     // Animate
-    $('.intro-box').removeClass('d-none');
     $('.intro-box').addClass('intro-animation');
     $('.color-wipe').addClass('wipe-out-intro');
     setTimeout(function(){
@@ -83,10 +105,10 @@ function play_intro(){
         $('.intro-box').addClass('d-none');
         $('.color-wipe').css('width', '0vw');
         $('.color-wipe').removeClass('wipe-out-intro');
-    },4000);
 
-    // Don't show intro again this session
-    sessionStorage.setItem('play-intro', 'false');
+        // Don't show intro again this session
+        sessionStorage.setItem('play-intro', 'false');
+    },4000);
 }
 
 function color_wipe_out(){
@@ -105,6 +127,7 @@ function color_wipe_in(){
     // Setup
     $('.color-wipe').css('width', '0vw');
     $('.color-wipe').removeClass('color-wipe-out');
+    $('.color-wipe').removeClass('d-none');
 
     // Animate
     $('.color-wipe').addClass('color-wipe-in');
@@ -116,4 +139,35 @@ function color_wipe_in(){
 // Redirect to param
 function h_direct(href){
     window.location.href = href;
+}
+
+function setMinPageHeight(){
+    // Set min page height
+    let min_height = window.innerHeight - $('footer').outerHeight(true) - $('.navbar').outerHeight(true);
+    $('.body-wrapper').css("min-height", min_height + 'px' );
+}
+
+function placeThemePicker(){
+    if( isElementInViewport($('.page-bottom')) && window.innerWidth > 345){
+        $('.theme-picker').css('margin-bottom', $('.page-bottom').outerHeight(true))
+    }else{
+        $('.theme-picker').css('margin', '20px')
+    }
+}
+
+function isElementInViewport (el) {
+
+    if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el[0];
+    }
+
+    var rect = el.getBoundingClientRect();
+
+    let half = rect.bottom - rect.top;
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom - half <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
 }

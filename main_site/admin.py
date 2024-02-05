@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Feedback, Testimonial
+from .models import Feedback, Testimonial, Visitor
 
 
 # Example of how to edit Model options in the admin
@@ -42,16 +42,6 @@ class ExampleModel(admin.ModelAdmin):
         return obj.priority
 
 
-# class EmailTemplateAdmin(admin.ModelAdmin):
-#     search_fields = ['title', 'docket', 'subject', 'preview', 'html']
-#     list_display = ('title', 'docket', 'subject', 'preview')
-#     list_filter = ('date_created',)
-
-# class ContactAdmin(admin.ModelAdmin):
-#     search_fields = ['email', 'first_name', 'last_name', 'date_recieved', 'ip_address']
-#     list_display = ('email', 'first_name', 'last_name', 'date_recieved', 'ip_address')
-#     list_filter = ('date_recieved', 'ip_address')
-
 class FeedbackAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email', 'date_recieved', 'ip_address', 'content', 'priority']
     list_display = ('id', 'name', 'email', 'date_recieved', 'ip_address', 'priority')
@@ -70,15 +60,18 @@ class FeedbackAdmin(admin.ModelAdmin):
     
     # classes = ["collapse"]
 
-
 class TestimonialAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description', 'content', 'date_recieved']
     list_display = ('id', 'name', 'description', 'date_recieved')
 
     list_filter = ('date_recieved',)
 
+class VisitorAdmin(admin.ModelAdmin):
+    search_fields = ['ip_address', 'country', 'regionName', 'city','isp']
+    list_display = ('ip_address', 'country', 'regionName', 'city',)
+    list_filter = ('country', 'regionName', 'city', 'isp', 'mobile')
 
-# admin.site.register(EmailTemplate, EmailTemplateAdmin)
-# admin.site.register(Contact, ContactAdmin)
+
+admin.site.register(Visitor, VisitorAdmin)
 admin.site.register(Testimonial, TestimonialAdmin)
 admin.site.register(Feedback, FeedbackAdmin)

@@ -48,7 +48,7 @@
 }
 
 
-input.gradient-button{
+input.gradient-button, button.gradient-button, a.gradient-button{
     font-family: var(--def-head-font);
     font-size: 1.2rem;
 
@@ -62,7 +62,7 @@ input.gradient-button{
 
 
 .theme-picker{
-    padding: 20px;
+    margin: 20px;
     z-index: 1200;
     cursor: pointer;
 }

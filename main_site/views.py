@@ -3,11 +3,10 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 
-import requests
 from .utils import *
 
 from .forms import FeedbackForm
-from .models import Testimonial
+from .models import Visitor
 
 
 def home(request):
@@ -44,15 +43,10 @@ def geolocate(request):
     }
 
     ip = get_ip(request)
-    url = 'http://ip-api.com/json/' + '99.233.26.66' + '?fields=status,message,country,regionName,city,district,zip,lat,lon,timezone,isp,mobile,proxy'
-    response = requests.get(url)
-    data = response.json()
-
-    if(data['status'] == 'success'):
-        del data['status']
-        context['ip_info'] = data
+    if Visitor.objects.filter(ip_address=ip).exists():
+        context['ip_info'] = Visitor.objects.get(ip_address=ip)
     else:
-        context['error_message'] = 'Sorry there was an issue with the api. Please try again.'
+        context['error_message'] = 'Sorry there was an error getting the info on your IP. Please try again.'
 
     return render(request, 'main_site/pages/geolocate.html', context)
 

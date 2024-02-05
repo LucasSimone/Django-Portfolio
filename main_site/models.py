@@ -49,3 +49,38 @@ class Testimonial(models.Model):
     description = models.CharField(max_length=128,null=True,blank=True)
     content = models.TextField()
     date_recieved = models.DateTimeField(default=timezone.now,null=True,blank=True)
+
+class Visitor(models.Model):
+    ip_address = models.GenericIPAddressField(unique=True,null=True,blank=True)
+    country = models.CharField(max_length=128,null=True,blank=True)
+    regionName = models.CharField(max_length=128,null=True,blank=True)
+    city = models.CharField(max_length=128,null=True,blank=True)
+    district = models.CharField(max_length=128,null=True,blank=True)
+    zip = models.CharField(max_length=128,null=True,blank=True)
+    lat = models.CharField(max_length=128,null=True,blank=True)
+    lon = models.CharField(max_length=128,null=True,blank=True)
+    isp = models.CharField(max_length=128,null=True,blank=True)
+    mobile = models.BooleanField(null=True)
+    proxy = models.BooleanField(null=True)
+    last_visited = models.DateTimeField(default=timezone.now)
+
+    def save_visitor(ip_info):
+        visitor = Visitor(
+            ip_address = ip_info['ip'],
+            country = ip_info['country'],
+            regionName = ip_info['regionName'],
+            city = ip_info['city'],
+            district = ip_info['district'],
+            zip = ip_info['zip'],
+            lat = ip_info['lat'],
+            lon = ip_info['lon'],
+            isp = ip_info['isp'],
+            mobile = ip_info['mobile'],
+            proxy = ip_info['proxy']
+        ).save()
+
+        
+    def update_visitor_date(visitor):
+        visitor.last_visited = timezone.now()
+        visitor.save()
+

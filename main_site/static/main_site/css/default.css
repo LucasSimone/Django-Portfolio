@@ -1,7 +1,13 @@
 :root {
     --def-head-font: 'Protest Strike', sans-serif;
     --def-font: 'Lexend', 'sans-serif';
+    
 } 
+
+/* Overwrite Bootstrap Variable */
+html body{
+    --bs-body-font-size: 1.2rem;
+}
 
 html{
     scrollbar-width: thin;
@@ -34,4 +40,8 @@ html .h1, html h1{
 
 h3 a{
     color: var(--bs-heading-color);
+}
+
+html a{
+    color: var(--bs-body-color);
 }
