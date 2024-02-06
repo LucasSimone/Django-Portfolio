@@ -1,0 +1,208 @@
+
+{% extends "edm_tool/master.html"%}
+{% load static %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <div class="canvas-container" oncontextmenu="return false;">
+
+      <!-- Upload File Popup-->
+      <div class="popup png-upload-popup hide-import">
+        <div class="close">X</div>
+        <div class="title">Upload Png:</div>
+        <div class="content">
+          <div class="drag-area no-file">
+            <img src="{% static 'edm_tool/img/icons/upload-solid.svg' %}"></img>
+            <span class="drag-text">Drag file here or choose</span>
+            <input type="file"></input>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Canvas's -->
+      <canvas class="image-layer"></canvas>
+      <canvas class="slice-layer"></canvas>
+
+
+      <!-- Toolbar -->
+      <div class="canvas-tool-bar">
+        <div class="canvas-tool slice-wrap" title="PREVENT ERRORS"><img src="{% static 'edm_tool/img/icons/shield-solid.svg' %}"></div>
+        <div class="canvas-tool slice-color" title="INVERT SLICE COLOR"><img src="{% static 'edm_tool/img/icons/palette-solid.svg' %}"></div>
+        <div class="canvas-tool bottom creation-mode" title="CREATION MODE"><img src="{% static 'edm_tool/img/icons/eraser-solid.svg' %}"></div>
+        <!-- <div class="canvas-tool " title="INFO"><img src="/img/info-solid.svg"></div> -->
+      </div>
+
+      <!-- Canvas Mode -->
+      <div class="canvas-mode">
+        <div class="mode-text">MODE: CREATION</div>
+      </div>
+
+      <!-- CURRENT SLICE WIDTH HEIGHT -->
+      <div class="slice-dimensions">
+        <div class="dimension width">
+          <span class="dim">W: </span>
+          <div>
+            <span id="w-pixels"></span>
+            <span class="unit">px</span>
+          </div>
+        </div>
+        <div class="dimension height">
+          <span class="dim">H: </span>
+          <div>
+            <span id="h-pixels"></span>
+            <span class="unit">px</span>
+          </div>  
+        </div>
+      </div>
+
+      <!-- SLICE OPTIONS -->
+      <div class="expand-slice-options">
+        <img src="{% static 'edm_tool/img/icons/expand-solid.svg' %}">
+      </div>
+      <div class="slice-code-options hide-import">
+
+        <div class="option-header">
+          <img class="collapse-slice-options" src="{% static 'edm_tool/img/icons/collapse-solid.svg' %}">
+          <div>EDM OPTIONS</div>
+        </div>
+
+        <div class="option-content">
+          <div class="top">
+            <div class="section link-switch sso nss-hide">
+              <div class="row">
+                <div>LINK:</div>
+                <div class="link-switch-container">
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div class="section link-options sso nss-hide hide-import">
+              <div class="row">
+                <input type="text" class="" id="slice-link" name="slice-link" placeholder=""></input>
+              </div>
+              <div class="row flex-start">
+                <img class="link-icon email-link" title="EMAIL LINK" src="{% static 'edm_tool/img/icons/envelope-solid.svg' %}">
+                <img class="link-icon tele-link" title="TELEPHONE LINK" src="{% static 'edm_tool/img/icons/phone-solid.svg' %}">
+              </div>
+            </div>
+            <div class="section mailto-options sso nss-hide hide-import">
+              <div class="row">
+                <div>MAILTO OPTIONS:</div>
+              </div>
+              <div class="row input-split">
+                <div>EMAIL:</div>
+                <input type="text" class="" id="mailto-email" name="mailto-email" placeholder="email@email.com"></input>
+              </div>
+              <div class="row input-split">
+                <div>SUBJECT:</div>
+                <input type="text" class="" id="mailto-subject" name="mailto-subject" placeholder="Please Enter Email First." disabled></input>
+              </div>
+              <div class="row">
+                <div>BODY:</div>
+              </div>
+              <div class="row">
+                <textarea id="mailto-body" name="mailto-body" rows="6" placeholder="Please Enter Email and Subject First." disabled></textarea>
+              </div>
+            </div>
+            <div class="section sso nss-hide">
+              <div class="row color-split ">
+                <div>SLICE COLOR:</div>
+                <div class="color-fields slice-dropper">
+                  <div class="color-box"></div>
+                  #<input type="text" class="" id="slice-color" name="slice-color" placeholder="NONE"></input>
+                </div>
+              </div>
+            </div>
+            <div class="section sso nss-hide">
+              <div class="row inline-title-input">
+                <div class="row">
+                  <div>ALT TAG:</div><input type="text" class="" id="alt-tag" name="alt-tag" placeholder=""></input>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom">
+            <div class="section full-edm-options">
+              <div class="row color-split">
+                <div>MAIN COLOR:</div>
+                <div class="color-fields main-dropper">
+                  <div class="color-box"></div>
+                  #<input type="text" class="" id="main-color" name="main-color" placeholder="" value="ffffff"></input>
+                </div>
+              </div>
+              <div class="row inline-title-input">
+                <div>EDM TITLE:&nbsp;</div><input type="text" class="" id="edm-title" name="edm-title" placeholder=""></input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPORT BUTTON -->
+      <div class="export-slices">
+        <img src="{% static 'edm_tool/img/icons/file-export-solid.svg' %}">
+      </div>
+
+      <!-- EXPORT POPUP -->
+      <div class="popup slice-export-popup hide-import" >
+        <div class="close">X</div>
+        <div class="title">Export Slices</div>
+        <div class="content">
+          <div class="content-65">
+            <div class="row">
+              <div class="label">Image/Slice Name:</div>
+              <div class="popup-field"><input type="text" class="" id="slice-name" name="slice-name" placeholder="55555"></input></div>
+            </div>
+            <!-- <div class="row">
+              <div class="label">CLIENT:</div>
+              <div class="client-dropdown">SELECT CLIENT<span>V</span></div>
+              <div class="dropdown-selection hide-import"></div>
+            </div>
+            <div class="row">
+              <div class="label">DATE FOLDER:</div>
+              <div class="popup-field"><input type="text" class="" id="folder-date" name="folder-date" placeholder="20230511"></input></div>
+            </div> -->
+          </div>
+          <div class="middle-line"></div>
+          <div class="content-25">
+              <div class="slice-download popup-button">DOWNLOAD</div>
+              <div class="generate-html popup-button">GENERATE HTML</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIMENSIONS ATTCHED TO MOUSE -->
+      <div class="mouse-dimensions hide-import">
+        <div class="mouse-dimension">
+          <span>W: </span>
+          <div>
+            <span id="w-mouse">px</span>
+          </div>
+        </div>
+        <div class="mouse-dimension">
+          <span>H: </span>
+          <div>
+            <span id="h-mouse">px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLOR SELECTOR -->
+      <div class="color-selector hide-import">
+        <div class="color-border">
+          <div class="inside-border">
+            <div class="middle-point"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="module" src="{% static 'edm_tool/js/canvas.js' %}"></script>
+
+
+{% endblock content %}

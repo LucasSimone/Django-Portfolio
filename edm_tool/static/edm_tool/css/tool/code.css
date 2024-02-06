@@ -1,0 +1,11 @@
+.code-area{
+    height: 100%;
+    border: none;
+}
+.CodeMirror{
+    height: calc(100vh - 40px) !important;
+}
+
+.CodeMirror-hscrollbar{
+    pointer-events: all !important;
+}

@@ -1,0 +1,41 @@
+<html data-bs-theme="light">
+    <head>
+
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+        <!-- Title -->
+        {% if title %}
+        <title>Main Site - {{title}}</title>
+        {% else %}
+        <title>Main Site</title>
+        {% endif %}
+
+        <!-- Include -->
+        {% include 'edm_tool/include/head.html' %} 
+
+    </head>
+
+    <body>
+
+        {% include 'edm_tool/include/header.html' %} 
+
+        {% include 'main_site/include/color_wipe.html' %}
+
+        {% include 'edm_tool/include/info.html' %}
+
+        <div id="mainbody">
+
+            {% block content %}{% endblock %}
+            
+        </div>
+
+
+
+        {% include 'edm_tool/include/scripts.html' %}
+
+    </body>
+
+</html>

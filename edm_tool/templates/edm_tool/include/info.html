@@ -1,0 +1,394 @@
+{% load static %}
+<div class="info-window hide-import">
+    
+    <div class="info-container">
+
+        <h2>EDM Tool Info</h2>
+
+        <h3>General</h3>
+        <div class="page">
+            <ul>
+                <li>
+                    The tool uses alerts to provide information such as the EDM image you uploaded not being 700px wide, error messages, or other helpful alerts. 
+                    Please ensure you don't prevent the alerts from showing.
+                </li>
+                <li>
+                    Your browser may ask permission to use the clipboard for some features of the tool. Please allow as it makes using the tool faster. 
+                </li>
+            </ul>
+        </div>
+
+        <h3>Canvas</h3>
+        <div class="page">
+
+            <h4>Start an EDM</h4>
+            <div class="sub-topic">
+                <p>There are 2 ways to start making an EDM: </p>
+                <ul>
+                    <li>If the EDM is for a client in the CRM, start by logging into in the CRM and going to their account. In the navigation under 
+                        Campaigns click on the templates option. Once there click on the Icon labeled "Create with Wizard". You will be brought to
+                        the canvas where you can upload your PNG and create your EDM. Once you are ready <span data-hash="exporting" class="sub-link">exporting</span> a your 
+                        EDM will create a template in the CRM under the account you started from. You will then be redirected to the template page 
+                        to finish creating it with the subject, preview, title, etc.
+                    </li>
+                    <li>
+                        If you are making an EDM that will not be in the CRM. Click on the upload icon <img src="{% static 'edm_tool/img/icons/upload-icon-white.png' %}"> in the top right corner on the navigation 
+                        bar. It will bring you to the canvas page where you can upload your png and create your EDM.
+                    </li>
+                </ul>
+            </div>
+
+            <h4>Moving The Image</h4>
+            <div class="sub-topic">
+                <ul>
+                    <li>Scrolling will move the image vertically</li>
+                    <li>Hold the shift key + scrolling will move the image horizontally</li>
+                    <li>Hold the alt key + scrolling will zoom the image in and out. <small>Note for Mozilla you will need to change a setting in the about:config.</small></li>
+                    <li>Hold right click on the canvas and drag your mouse to move the image wherever you like.</li>
+                    <li>
+                        Zooming in very close to the image will make a grid appear showing you the pixel borders, for precise slice creation.
+                        The grid is white by default. If you are having trouble seeing it on a white background EDM you can click the palette in the 
+                        <span class="sub-link" data-hash="toolbar">toolbar</span> and it will change the grid color to black.
+                    </li>
+                </ul>
+            </div>
+
+            <h4>Slicing The EDM</h4>
+            <div id="slicing" class="sub-topic">
+                <p>
+                    To make a slice click and drag anywhere on the canvas. You will see a box outline appear on the EDM PNG. These slices show the different 
+                    sub images the EDM will be broken up into. You can create slices almost however you like but there are some rules and best practices to follow below.
+                    Slices can also be resized by selecting the slice you want to change. You will know which slice is selected by the blue outline. You can then grab the
+                    selected slices edge and resize it. Note this only adjusts the edge of the slice you are selecting. If the edge of your selected slice touches another 
+                    slice edge, you will have to adjust the other slice as well. Otherwise the gap in the image will not be included in the final EDM (<a href="{% static 'edm_tool/img/examples/resize.jpg' %}" target="_blank" class="sub-link">example</a>).
+                    Continue this for the whole EDM and when you are ready you can move onto adding links and other <span class="sub-link" data-hash="EDM-options">edm options</span>.
+                </p>
+                <span style="text-decoration: underline;">Rules:</span>
+                <ul>
+                    <li>You can only resize one slice at a time. If 2 slices are touching they will both have to be resized separately.</li>
+                    <li>EDMs are tables with columns and rows. It's hard to do but of you create a slice structure that is impossible to 
+                        make a table from your EDM generation will fail. In this <a href="{% static 'edm_tool/img/examples/structure.jpg' %}" target="_blank" class="sub-link">example</a> there is no way to make a table that
+                        has rows and columns from this slice structure. The other way to make the generation fail is to leave an incomplete table. In this <a href="{% static 'edm_tool/img/examples/structure_2.jpg' %}" target="_blank" class="sub-link">example</a> you can see there is 
+                        a missing slice that would cause the HTML generation to fail. If you are worried you might make an invalid structure by accident, you can use the guard feature in the 
+                        <span class="sub-link" data-hash="toolbar">toolbar</span>. This wraps the image in a slice that you can then cut down to make your EDM ensuring none of these invalid structures can be made. 
+                    </li>
+                    <li>If you're not using the guard feature its best to cut the EDM up into it's separate rows first. Then go though again and make any further sub slices you may need.</li>
+                    <li>The tool won't prevent you from doing it but for best practices keep the height of your slices less than 1000px.</li>
+                </ul>
+                <span style="text-decoration: underline;">Tips:</span>
+                <ul>
+                    <li>You can drag from both the left and right side of the image and make a slice dragging up or down.</li>
+                    <li>If you are ever worried that a slice might not be touching the edge or another slice, you will know for sure by the pink
+                        guidelines that pop up. If you see one that shows where the edge of the slice will be. These guidelines show on the edges of the image
+                        in the center of the image and when a slice is inline with another slice edge.
+                    </li>
+                    <li>
+                        When making a slice the tool has a certain edge tolerance for snapping slices to edges so you dont need to be pixel perfect.
+                        You will know a slice is on the edge of the image or touching another slice because a pink guideline line will appear indicating so.
+                        The more you zoom in the less snapping it will do meaning you can be more precise. 
+                </ul>
+            </div>
+
+            <h4>Toolbar</h4>
+            <div id="toolbar" class="sub-topic">
+                <p>The toolbar is black bar with icons located on the left side of the canvas.</p>
+                <ul>
+                    <li><img src="{% static 'edm_tool/img/icons/shield-solid.svg' %}"> - Guard feature. Clicking this will remove all the slices and 
+                        create a single new one that covers the whole image. Having a single slice around the whole EDM
+                        prevents you from making any invalid slice structures. <a href="{% static 'edm_tool/img/examples/structure.jpg' %}" target="_blank" class="sub-link">Example.</a>
+                    </li>
+                    <li><img src="{% static 'edm_tool/img/icons/palette-solid.svg' %}"> - Palette. Clicking this inverts the slice outline colors as well as the grid.
+                        If the current EDM image color is making things hard to see this should help.
+                    </li>
+                    <li>
+                        <img src="{% static 'edm_tool/img/icons/eraser-solid.svg' %}"> - Eraser. This is a reset. Clicking this will wipe the current image and slices as well as resetting the state back to creation.
+                    </li>
+                    <li>
+                        In the bottom left beside the toolbar you will see a back bar with "MODE:" on it. This indicates the current mode of canvas you are using. There are 3 different
+                        states for the canvas, "CREATION", "ROW REPLACE", "SERVER OVERWRITE". The default mode is creation. This is the mode you are in whenever you are making a new EDM.
+                        The other two states are for when you are editing a row or image from an EDM in the editor.
+                        <br><br>
+                        If you ever end up in an incorrect state that you do not want to be in please click the eraser to clear the state and start over on the process you were attempting. 
+                        Ending up in the wrong state is possible if you go to replace something in the editor and get side tracked then you end up coming back to the EDM later attempting to
+                        create a new EDM.
+                    </li>
+                </ul>
+                <span style="text-decoration: underline;padding:0 7px;">ROW REPLACE</span>
+                <p>
+                    If you are in this state you have come from the editor to replace a row. You can upload any PNG you want and you can create as many slices as you want, following proper
+                    <span class="sub-link" data-hash="slicing">slice structure</span>. You can add links and all slice options here or add them in once you're back at the editor.
+                    When you are done and click export, you will need to select the client and image name, as you are replacing the selection with new HTML. After <span data-hash="exporting" class="sub-link">exporting</span> you will be brought 
+                    back to the editor where you can see the changes and continue editing.
+                </p>
+                <span style="text-decoration: underline;padding:0 7px;">SERVER OVERWRITE</span>
+                <p>
+                    If you are in this state you have come from the editor to overwrite an image. You can upload any PNG you want to use. In this mode you are only able to make one slice.
+                    as you can only replace one image with another. If you are overwriting an image that was a whole row(700px wide) you can make your new slice as tall as you want. If you are
+                    overwriting a smaller sub image the new image you create will have to be the same width and height as the previous image. The tool will let you know on export if the new image is
+                    an incorrect size. When you are ready you can click export. It will prompt you again and ensure you mean to overwrite and image. You don't have to select a client
+                    or new image name on this mode as you are replacing an image that already exists.
+                </p>
+            </div>
+
+            <h4>EDM Options</h4>
+            <div id="EDM-options" class="sub-topic">
+                <p>
+                    To open the EDM options click on the <img src="{% static 'edm_tool/img/icons/expand-solid.svg' %}"> icon in the top right of the canvas. In this box you can set the EDM title and main color, 
+                    as well as the options for each slice. To change the options for a specific slice click on the one you want to change. You'll know which one is selected by
+                    the blue outline. Then you can set the link, slice color and alt tag if needed for that slice otherwise you can leave the fields alone.
+                    <br><br>
+                    If the link you are creating is going to a phone number or email you can click the <img src="{% static 'edm_tool/img/icons/phone-solid.svg' %}"> and <img src="{% static 'edm_tool/img/icons/envelope-solid.svg' %}"> icons
+                    respectively. These will add the start of the links and then you can fill in the email or phone number needed. The email link comes with extra subject and body fields,
+                    if you want you email to be prepopulated. Otherwise, they can be left blank.
+                    <br><br>
+                    When selecting a color for a slice or EDM you can enter in the respective areas, or you can click on the color box beside the color code and select a color from the EDM.
+                    <br><br>
+                    Note. slice colors need to be set in regions of the EDM with multiple slices that differ from the main EDM color. If you have a white EDM with a black footer you will need
+                    to set the slice color on each slice in the footer that is black. If, however the footer is contained in a single slice there is no need. This is needed because sometimes
+                    emails are displayed with small pixel gaps in between the slices and without the slice color being set the main EDM color will show through. So if you didn't set the slice 
+                    colors in the footer example above the footer may appear with small white lines when shown in the email client.<small> A better solution would be to contain the footer 
+                    to it's own table and set the table color but that's a task for another day.</small>
+                </p>
+                <span style="text-decoration: underline;padding:0 7px;">HELPFUL TIPS:</span>
+                <p>
+                    When you are editing the link for a slice you don't need to click on/focus the link box each time. If you have the link 
+                    you want to give the slice in your clipboard you can just select the slice then paste it. This is very helpful when referencing a past
+                    EDM from the CRM with lots of the same links. You can alt-tab back and forth between the windows, copying a link from a CRM EDM then selecting the 
+                    correct slice and pasting.
+                    <br><br>
+                    The same is true for copying. If you select a slice and copy it will add the link to you clipboard. This is helpful if you have the same link throughout an
+                    EDM. You can select another slice with the link you need, copy. Then click on the slice that needs the link and paste. 
+                    <br><br>
+                    If you ever want to test a link. Hover over the slice which has the link. Hold they control key and then click on the slice. This will open the link in a new tab.
+                    <br><br>
+                    Note. Your browser might ask for permission to use the clipboard you will need to allow it. 
+                </p>
+            </div>
+
+            <h4>Exporting</h4>
+            <div id="exporting" class="sub-topic">
+                <p>
+                    Once your image is all sliced up and you've added your links and other <span class="sub-link" data-hash="EDM-options">EDM options</span> you can click on the 
+                    export <img src="{% static 'edm_tool/img/icons/file-export-solid.svg' %}"> icon in the bottom right of the canvas. This will show the export window. Here you will have to choose a image
+                    name, select the client folder from the dropdown and choose the date folder which auto populates to today's date. For the image name I usually use the docket 
+                    number in this field. When selecting your client's name from the dropdown this is a 
+                    list of the folders in the jportal server under /_emails/_files. _files is where the tool stores the images to. If you don't see the client folder you need. 
+                    you can make a new folder in this directory. Then close and open the dropdown again to refresh the folder names.
+                    <br><br>
+                    Then you can generate the HTML. If you came to the tool through the wizard, you will be brought back to the CRM in a new template window with your code. You can 
+                    then fill in your subject preview title and docket number to finish creating your EDM. If you started making the EDM on the tool then you will be brought to the code page
+                    where you can copy the EDM code and use it as needed. 
+                </p>
+            </div>
+        </div>
+
+        <h3>Editor</h3>
+        <div class="page">
+
+            <h4>How to Edit an EDM</h4>
+            <div class="sub-topic">
+                <p>There are 2 ways to use the editor: </p>
+                <ul>
+                    <li>
+                        If the EDM you want to edit is in the CRM. Find the template in the CRM and click edit. In the CRM edit page you will see a button labeled 
+                        "WIZARD" next to the code and preview buttons. Click on it and you will be brought to the tool edit page where you can see and edit the EDM.
+                        Once done you can hit the save <img src="{% static 'edm_tool/img/icons/floppy-disk-solid.svg' %}"> icon in the lower right corner. This will bring you back to the CRM with the 
+                        updated EDM.
+                    </li>
+                    <li>
+                        If you are trying to edit an EDM that isn't in the CRM you can go to the code page and paste you HTML in the code window. Then click on editor in 
+                        the top navigation and you can view and edit the EDM. Once you are done you can go back to the code page in the top navigation and copy your updated EDM.
+                </ul>
+            </div>
+
+            <h4>Edit Options</h4>
+            <div class="sub-topic">
+                <ul>
+                    <li>
+                        You can select/click on the different images in the EDM. When you select an image it will highlight the image in pink and populate 
+                        the options on the right side with the current settings for that image    
+                    </li>
+                    <li>
+                        SRC - You can modify the image SRC or replace it with another images SRC in this field. This field is setup to only allow images from the J portal
+                        Server as it appends the url to the start of the field. This also allows for easier SRC editing.
+                    </li>
+                    <li>
+                        LINK - In this field you can edit the images link. This link input works the same way it does in the EDM options on the canvas. You dont need to
+                        focus/click on the input field to paste a link. Instead, if you have a link in your clipboard, you can just select the image you want and hit paste.
+                        <br><br>
+                        This there are also options to help with phone number or email links. You can click on the <img src="{% static 'edm_tool/img/icons/phone-solid.svg' %}"> or <img src="{% static 'edm_tool/img/icons/envelope-solid.svg' %}">
+                        icons respectively. The telephone icon will clear the input and add the tel: that is needed for phone links. The email icon will clear the field and add mailto: 
+                        in the link box. Pressing the email icon also adds extra options where you can enter an email and body to prepopulate those fields if needed. 
+                        <br><br>
+                        If you want to test a link hover over the image in the left side then press the control key and click the image. This will open the link in a new tab.
+                    </li>
+                    <li>
+                        ALT TAG - You can edit the alt tag for an image in this field.
+                    </li>
+                    <li>
+                        IMAGE COLOR - You can edit the background color for an image in this field. You can either edit the hex code in the input or click on the color
+                        box and select a new color from the image.
+                    </li>
+                    <li>
+                        TITLE - You can edit the title for the EDM here.
+                    </li>
+                    <li>
+                        MAIN COLOR - You can edit the main color for the EDM here. You can either edit the hex code in the input or click on the color.
+                    </li>
+                    <li>
+                        TOOGLE LINES - Clicking this will remove the outlines on the EDM preview so you can view the EDM uninterrupted.
+                    </li>
+                </ul>
+            </div>
+
+            <h4>Uploading a Gif or PDF</h4>
+            <div class="sub-topic">
+                <ul>
+                    <li>
+                        If your EDM has a gif you need to add you can do so by clicking on the upload <img src="{% static 'edm_tool/img/icons/upload-solid.svg' %}"> icon above the SRC input on 
+                        the right-hand side.  This will open a popup where you can upload you gif file, the name for the gif, the client folder and folder date which
+                        auto populates to todays date. Once you hit upload the gif will be saved to the server and the SRC will be updated. 
+                        <br><br>
+                        Note you will want to ensure the dimensions of the gif match the dimensions of the slice you are replacing, or the end result won't be correct. If the image you are replacing is 700px wide
+                        the gif can be any height as long as it's also 700px wide. If you are replacing an image that isn't 700px wide both the width and height of the gif will have to match
+                        in order for the gif to fit. 
+                        <br><br>
+                        Please try to keep gif sizes around 1mb is size. There is an online compression tool you can use <a href="https://ezgif.com/optimize" target="_blank" class="sub-link">here</a> if your gif is too large. 
+                    </li>
+                    <li>
+                        If your EDM has a pdf you need to link to you can click on the upload <img src="{% static 'edm_tool/img/icons/upload-solid.svg' %}"> icon above the link input on the right-hand side. 
+                        This will open the file upload popup where you can upload your pdf, set your pdf name, select the client folder, and date folder. Once you hit upload the PDF
+                        will be uploaded to the server, the link will then be generated and added to the image you had selected.
+                    </li>
+                </ul>
+            </div>
+
+            <h4>Replacing Images</h4>
+            <div class="sub-topic">
+                <p>
+                    There are 2 types of replacements you can do. You can replace a whole row with new HTML and images or you can overwrite a single image from the EDM.
+                </p>
+                <span style="text-decoration: underline;padding:0 7px;">REPLACE ROW</span>
+                <p>
+                    Clicking on this will first show you the row you will be replacing. If you click on a image that is not a complete row it will find the parent row in the 
+                    main table. You will be asked to confirm if this is the row you would like to replace and if so you will be brought to the canvas. You will them be in the 
+                    canvas with the REPLACE ROW state. You can upload any PNG you want and you can create as many slices as you want, following proper
+                    <span class="sub-link" data-hash="slicing">slice structure</span>. You can add links and all slice options here or add them in once you are back at the editor.
+                    When you are done and click export, you will need to select the client and image name, as you are replacing the selection with new HTML. After <span data-hash="exporting" class="sub-link">exporting</span> you will be brought 
+                    back to the editor where you can see the changes and continue editing.
+                </p>
+                <span style="text-decoration: underline;padding:0 7px;">SERVER OVERWRITE</span>
+                <p>
+                    This mode is used when you want to change something on an EDM that has already gone out. Or you have sent a test EDM but there is a text change or something on the EDM
+                    where you want the update to reflect on the test that has already sent. 
+                    <br><br>
+                    If you are trying to replace something are unsure whether the EDM you are working on has already been sent use the other replacement mode.
+                    <br><br>
+                    Clicking on this will show an alert explaining the above and it will prompt you for a password. Entering the password will bring you to the canvas in SERVER OVERWRITE mode. 
+                    You can upload any PNG you want to use. In this mode you are only able to make one slice.
+                    as you can only replace one image with another. If you are overwriting an image that was a whole row(700px wide) you can make your new slice as tall as you want. If you are
+                    overwriting a smaller sub image the new image you create will have to be the same width and height as the previous image. The tool will let you know on export if the new image is
+                    an incorrect size. When you are ready you can click export. It will prompt you again and ensure you mean to overwrite and image. You don't have to select a client
+                    or new image name on this mode as you are replacing an image that already exists. Once done you will be brought back to the editor.
+                </p>
+            </div>
+
+            <h4>Delete & Insert</h4>
+            <div class="sub-topic">
+                <span style="text-decoration: underline;padding:0 7px;">DELETE</span>
+                <p>
+                    If you have an image you would like to remove from the EDM you can select it and hit delete. If it's a whole row it will be removed. 
+                    If the image is a cell in a row. It will remove the cell but don't delete a single cell and leave it alone or the EDM will break. Either 
+                    continue deleting cells until the whole row is removed or replace the deleted cell. 
+                </p>
+                <span style="text-decoration: underline;padding:0 7px;">INSERT ROW</span>
+                <p>
+                    If you need to add another image in your EDM you can select the an image and click insert row to add a blank row beneath it. 
+                </p>
+                <span style="text-decoration: underline;padding:0 7px;">INSERT CELL</span>
+                <p>
+                    If you need to add another cell next to your image you can click insert cell to add a blank cell to your row.
+                </p>
+            </div>
+
+            <h4>Getting the code</h4>
+            <div class="sub-topic">
+                <ul>
+                    <li>
+                        If you got to the tool through the CRM there will be a save icon <img src="{% static 'edm_tool/img/icons/floppy-disk-solid.svg' %}"> in the lower right corner of the editor options.
+                        Pressing it will save your changes and bring you back to the CRM.
+                    </li>
+                    <li>If you didn't come through the CRM you can click on CODE in the to navigation and copy your code from the code window.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <h3>Code</h3>
+        <div class="page">
+
+            <h4>What's the use?</h4>
+            <div id="" class="sub-topic">
+                <p>
+                    This is used when you are editing an EDM that does not go in the CRM. Maybe you are making an EDM for the 
+                    <a class="sub-link" href="http://test.tbf.email/login.php" target="_blank">test portal</a>, Mailchimp or Constant Contact.
+                    <br><br>
+                    This is also useful when you need to make an edit that the tool cannot preform.
+                </p>
+                <ul>
+                    <li>Pasting and EDM in the code window will allow you to edit it once you navigate to the editor.</li>
+                    <li>Once you are finished editing an EDM in the editor navigating. The updated EDM code will be displayed in the code window once you navigate back to the code page.</li>
+                    <li>After you have made an EDM in the canvas and hit generate you will be brought to this page so you can get your code. <small>(Note not for EDMs being made through the CRM)</small></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="close-overlay close-info-window"><img src="{% static 'edm_tool/img/icons/xmark-solid.svg' %}"></div>
+</div>
+
+
+<script>
+    $('.info-container').on("click", "h3", function(){
+        if($(this).next(".page").is(":visible")){
+            $('.info-container .page').hide(); 
+        }else{
+            $('.info-container .page').hide();
+            $(this).next("div").show();
+        }
+        
+    });
+    $('.page').on("click", "h4", function(){
+        if($(this).next(".sub-topic").is(":visible")){
+            $('.page .sub-topic').hide(); 
+        }else{
+            $('.page .sub-topic').hide();
+            $(this).next(".sub-topic").show();
+        }
+        
+    });
+
+    $('.sub-link').on("click",  function(e){
+        let id = e.currentTarget.dataset.hash;
+        console.log(e.currentTarget.dataset.hash)
+        $('#' + id).parent().show();
+        //$('#' + id).next(".sub-topic").show();
+        $('#' + id).show();
+        $('#' + id)[0].scrollIntoView(false);
+    });
+
+    $('.open').show();
+    $('.open').parent().show();
+    
+    $(document).on("keydown", function (e)
+    {
+        if (e.keyCode == 70 && e.ctrlKey) // ctrl+f
+        {
+            $('.info-container .page').show(); // show all flaps
+            $('.page .sub-topic').show(); // show all flaps
+        }
+    });
+</script>

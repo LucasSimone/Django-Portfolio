@@ -1,0 +1,108 @@
+
+
+/* Wipe transition */
+.color-wipe{
+    position: fixed;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 2000;
+
+    background: #12c2e9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
+    background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
+}
+
+.color-wipe-in{
+    animation-name: color-wipe-in;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+.color-wipe-out{
+    right:0;
+    animation-name: color-wipe-out;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+.wipe-out-intro{
+    right:0;
+    animation-name: wipe-out-intro;
+    animation-duration: 4s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes color-wipe-in {
+    0%   {width:0vw;}
+    100% {width:100vw;}
+}
+
+@keyframes color-wipe-out {
+    0%   {width:100vw;}
+    25%   {width:100vw;}
+    100% {width:0vw;}
+}
+
+@keyframes wipe-out-intro {
+    87.5%   {transform: translate(0%,0);}
+    100% {transform: translate(100%,0);}
+}
+
+/* Intro */
+.intro-box{
+    position: fixed;
+    top: 10%;
+    left: -100%;
+    z-index: 2005;
+    transform: translate(0,-50%) rotate(0deg) ;
+
+    font-family: var(--def-head-font);
+    font-size: clamp(0px, 25vw, 300px);
+    color: white;
+}
+
+.intro-animation{
+    animation: intro 4s ease-out forwards;
+}
+
+@keyframes intro {
+    0% {
+        top: 20%;
+        left: -100%;
+    }
+    24% {
+        top: 20%;
+        left: 150%;
+    } 
+    25% {
+        top: 80%;
+        left: 150%;
+    }
+    49% {
+        top: 80%;
+        left: -100%;
+    } 
+    50% {
+        top: 50%;
+        left: -100%;
+    } 
+    62.5% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    } 
+    87.5% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    } 
+    100% {
+        top: 50%;
+        left: 150%;
+        transform: translate(-50%,-50%);
+    } 
+
+  }

@@ -1,0 +1,23 @@
+{% load static %}
+<div class="nav-bar">
+  <div class="nav-half screen">
+    <div><a href="{% url 'edm_tool-code' %}" class="code wipe-transition">
+      <span class="gradient-text">CODE</span>
+    </a></div>
+    <div><a href="{% url 'edm_tool-editor' %}" class="wipe-transition">
+      <span class="gradient-text">EDITOR</span>
+    </a></div>
+    <div><a href="{% url 'edm_tool-canvas' %}" class="wipe-transition">
+      <span class="gradient-text">CANVAS</span>
+    </a></div>
+  </div>
+  <div class="nav-half create">
+    <div title="BACK TO PROJECTS">
+      <a href="{% url 'site-projects' %}" class="wipe-transition"><img src="{% static 'edm_tool/img/icons/door-open-solid.svg' %}"></a> 
+    </div>
+
+    <div class="help-button" title="INFO"><img src="{% static 'edm_tool/img/icons/circle-info-solid.svg' %}"></div>
+    <div class="upload-png-button" title="UPLOAD PNG"><img src="{% static 'edm_tool/img/icons/upload-solid.svg' %}"></div>
+    
+  </div>
+</div>

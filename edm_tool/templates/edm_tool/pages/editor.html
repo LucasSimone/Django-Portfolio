@@ -1,0 +1,161 @@
+
+{% extends "edm_tool/master.html"%}
+{% load static %}
+
+{% block content %}
+
+<div class="center-page-container">
+    <div class="box-container">
+
+        <!-- Upload File Popup-->
+        <div class="popup file-upload-popup hide-import">
+            <div class="close">X</div>
+            <div class="title">Upload File:</div>
+            <div class="content">
+                <div class="row drop-area">
+                    <div>
+                        <input type="file" id="file-input" style="display: none;">
+                        <label for="file-input" class="btn">BROWSE</label>
+                        <span class="input-filename">No File Selected</span>
+                    </div>
+                    <div>SELECT OR DROP FILE HERE</div>
+                </div>
+                <div class="row">
+                    <div class="label">File Name:</div>
+                    <div class="popup-field"><input type="text" class="" id="file-name" name="file-name" placeholder="filename"></input></div>
+                </div>
+                <div class="row">
+                    <div class="label">CLIENT:</div>
+                    <div class="client-dropdown">SELECT CLIENT<span>V</span></div>
+                    <div class="dropdown-selection hide-import"></div>
+                </div>
+                <div class="row">
+                    <div class="label">DATE FOLDER:</div>
+                    <div class="popup-field"><input type="text" class="" id="folder-date" name="folder-date" placeholder="YYYYMMDD"></input></div>
+                </div>
+                <div class="row">
+                    <div class="empty"></div>
+                    <div class="upload-file btn">UPLOAD</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="edm-container">
+            
+        </div>
+
+        <div class="middle-container">
+
+        </div>
+
+        <div class="control-container">
+            <div class="top-options">
+
+                <div class="control-row">
+                    <div class="flex-between mb-10">
+                        <div class="label w-45">SRC:</div>
+                        <div class="icons w-45">
+                            <img class="icon" title="REPLACE IMAGE WITH GIF" id ="gif-button" src="{% static 'edm_tool/img/icons/upload-solid-black.svg' %}">
+                        </div>
+                    </div>
+                    <input class="input w-100" type="text" name="img-src" id="img-src" placeholder="/image.jpg">
+                </div>
+
+                <div class="control-row">
+                    <div class="flex-between mb-10">
+                        <div class="label w-45">Link:</div>
+                        <div class="icons w-45">
+                            <img class="icon" title="EMAIL LINK" id="mailto-button" src="{% static 'edm_tool/img/icons/envelope-solid.svg' %}">
+                            <img class="icon" title="PHONE LINK" id ="tel-button" src="{% static 'edm_tool/img/icons/phone-solid.svg' %}">
+                            <img class="icon" title="UPLOAD PDF TO LINK TO" id ="pdf-button" src="{% static 'edm_tool/img/icons/upload-solid-black.svg' %}">
+                        </div>
+                    </div>
+                    <input class="input w-100" type="text" name="img-link" id="img-link" placeholder="NO LINK">
+                </div>
+
+                <div class="control-row mailto-options hide-import">
+                    <div class="label mb-10">EMAIL:</div>
+                    <input class="input w-100" type="text" name="mailto-link-email" id="mailto-link-email" placeholder="email@email.com">
+                </div>
+
+                <div class="control-row mailto-options hide-import">
+                    <div class="label mb-10">SUBJECT:</div>
+                    <input class="input w-100" type="text" name="mailto-link-subject" id="mailto-link-subject" placeholder="Please Enter Email First." disabled="">
+                </div>
+
+                <div class="control-row mailto-options hide-import">
+                    <div class="label mb-10">BODY:</div>
+                    <textarea id="mailto-link-body" name="mailto-link-body" rows="6" placeholder="Please Enter Email and Subject First." disabled=""></textarea>
+                </div>
+
+
+                <div class="control-row flex-between">
+                    <div class="label w-47">Alt Tag:</div>
+                    <div class="label w-47">Image Color:</div>
+                </div>
+                <div class="control-row flex-between">
+                    <input class="input w-47" type="text" name="img-alt-tag" id="img-alt-tag" placeholder="Alt Tag">
+                    <div class="w-47 flex-between">
+                        <div class="color-selector-box" id="img-color-box"></div>
+                        <div class="w-85 flex-between"><span class="color-hash">#</span><input class="input flex-grow-1" type="text" name="img-color" id="img-color" placeholder="Image Color"></div>
+                    </div>
+                </div>
+
+
+                <div class="control-row flex-between mt-55">
+                    <div class="control-button w-47 replace-new" title="REPLACE ROW WITH NEW HTML">REPLACE ROW</div>
+                    <div class="control-button w-47 replace-server">SERVER OVERWRITE</div>
+                </div>
+                <div class="control-row flex-between mt-30">
+                    <div class="control-button w-30 delete">DELETE</div>
+                    <div class="control-button w-30 insert-row">INSERT ROW</div>
+                    <div class="control-button w-30 insert-cell">INSERT CELL</div>
+                </div>
+            </div>
+            <div class="bottom-options">
+
+                <div class="control-row flex-between">
+                    <div class="label w-47">Title:</div>
+                    <div class="label w-47">Main Color:</div>
+                </div>
+                <div class="control-row flex-between">
+                    <input class="input w-47" type="text" name="edm-title" id="edm-title" placeholder="Title">
+                    <div class="w-47 flex-between">
+                        <div class="color-selector-box" id="main-color-box"></div>
+                        <div class="w-85 flex-between"><span class="color-hash">#</span><input class="input flex-grow-1" type="text" name="main-color" id="main-color" placeholder="Main Color"></div>
+                    </div>
+                </div>
+
+                <div class="control-row flex-between">
+                    <div class="line-toggle control-button flex-auto mg-h-20">TOGGLE LINES</div>
+                    <div class="slice-dim flex-auto mg-h-20">
+                        <div>WIDTH:</div>
+                        <div><span class="slice-dim-num">0</span>px</div>
+                    </div>
+                    <div class="slice-dim flex-auto mg-h-20">
+                        <div>HEIGHT:</div>
+                        <div><span class="slice-dim-num">0</span>px</div>
+                    </div>
+                    <!-- <div class="mg-h-20 save-html hide-import" Title="SAVE CHANGES TO CRM"><img src="/img/floppy-disk-solid.svg"></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLOR SELECTOR -->
+    <div class="color-selector hide-import">
+        <div class="color-border">
+            <div class="inside-border">
+                <div class="middle-point"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPORT BUTTON -->
+    <!-- <div class="save-html hide-import" Title="SAVE CHANGES TO CRM">
+        <img src="/img/floppy-disk-solid.svg">
+    </div> -->
+</div>
+
+
+{% endblock content %}

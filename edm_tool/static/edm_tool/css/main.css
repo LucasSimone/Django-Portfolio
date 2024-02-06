@@ -1,13 +1,8 @@
 
-
-.nav-spacer{
-    min-height: 56px;
-}
-
 .gradient-text{
     width:fit-content;
     font-family: var(--def-head-font);
-    background: #12c2e9;  /* fallback for old browsers */
+    background: #12c2e9; 
     background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
     background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
 
@@ -22,7 +17,7 @@
     width:fit-content;
     font-family: var(--def-head-font);
 
-    background: #12c2e9;  /* fallback for old browsers */
+    background: #12c2e9;
     background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
     background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
 
@@ -36,7 +31,7 @@
 .gradient-hover:hover{
     width:fit-content;
 
-    background: #12c2e9;  /* fallback for old browsers */
+    background: #12c2e9;  
     background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
     background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
 
@@ -52,7 +47,7 @@ input.gradient-button, button.gradient-button, a.gradient-button{
     font-family: var(--def-head-font);
     font-size: 1.2rem;
 
-    background: #12c2e9;  /* fallback for old browsers */
+    background: #12c2e9; 
     background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
     background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
 
@@ -60,9 +55,31 @@ input.gradient-button, button.gradient-button, a.gradient-button{
     border: none;
 }
 
+/* Wipe transition */
+.color-wipe{
+    position: fixed;
+    top:0;
+    width: 100vw;
+    height: 100vh;
 
-.theme-picker{
-    margin: 20px;
-    z-index: 1200;
-    cursor: pointer;
+    z-index: 2000;
+
+    background: #12c2e9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
+    background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
+}
+
+.color-wipe-in{
+    animation-name: color-wipe-in;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.color-wipe-out{
+    right:0;
+    animation-name: color-wipe-out;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
 }

@@ -1,0 +1,276 @@
+/*************************** PNG Classes **************************/
+.drag-area{
+    width:100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slice-overlay{
+    position: absolute;
+    pointer-events: none; 
+    z-index: 4;
+    cursor: crosshair;
+  }
+
+  .hide-import{
+    display: none !important; 
+  }
+
+  .popup {
+    position: absolute;
+    width: 50%;
+    height:50%;
+    top: 25%;
+    left: 25%;
+    background-color: white;
+    border: solid 3px black;
+
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+  }
+
+  .popup .title{
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    width:90%;
+    height:6%;
+  }
+  .popup .content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width:90%;
+    height:84%;
+  }
+
+  .popup .content .middle-line{
+    height:100%;
+    border-left: dotted 1px grey;
+    border-right: dotted 1px grey;
+  }
+  .popup .content .content-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width:45%;
+    height:100%;
+  }
+
+  .popup .content .row{
+    display: flex;
+    justify-content: space-between;
+
+    width:100%;
+
+    border-bottom: dotted grey 1px;
+  }
+
+  .popup .content .popup-button{
+    padding: 10px;
+    background-color: #000000;
+    color:#FFFFFF;
+    cursor: pointer;
+  }
+
+  .popup .content .popup-button:hover{
+    background-color: #FFFFFF;
+    color:#000000;
+    border: solid 1px black;
+  }
+
+  .popup .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 30px;
+    height: 30px;
+    background-color: #000000;
+    color:#FFFFFF;
+
+    font-weight: bold;
+    font-size: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
+  .popup .content .row .client-dropdown{
+    width: 145px;
+    height: 20.5px;
+    border: solid 1px black;
+    display: flex;
+    justify-content: space-between;
+
+    cursor: pointer;
+  }
+
+  .popup .content .row .client-dropdown span{
+    width: 15%;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .popup .content .row.missing .client-dropdown{
+    color: red;
+    border-color: red;
+  }
+
+  .popup .content .row.missing input{
+    color: red;
+    border-color: red;
+  }
+
+  .popup .content .row .dropdown-selection{
+    width: 145px;
+    height:200px;
+
+    position: absolute;
+    top: 20.5px; 
+    right:0;
+    z-index: 100;
+
+    background-color: #FFFFFF;
+    border: solid 1px black;
+
+    overflow-y: auto;
+  }
+
+  .popup .content .row .dropdown-selection .dropdown-item{
+    padding: 2px 0px;
+    cursor: pointer;
+  }
+
+  .popup .content .row .dropdown-selection .dropdown-item:hover{
+    background-color: #000000;
+    color: #FFFFFF;
+  }
+
+
+  .png-container{
+    background-color: #DCDCDC;
+    cursor: crosshair;
+  }
+
+  .slice-layer{
+    position: absolute;
+  }
+
+  .canvas-tool-bar{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:10;
+    width:3vh;
+    min-width: 40px;
+    height:100%;
+    background-color: #606060;
+
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+  }
+
+  .canvas-tool{
+    aspect-ratio : 1 / 1;
+    width: 70%;
+    cursor: pointer;
+    margin-top: 30%;
+  }
+
+  .slice-color{
+    background-color:  #0096FF;
+  }
+
+  .slice-dimensions{
+    position:absolute;
+    top:0;
+    right:0;
+    z-index:10;
+    width:200px;
+    height:40px;
+
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .dimension{
+    background-color: #606060;
+    width: 45%;
+    height: 70%;
+    color: #FFFFFF;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+
+  .export-slices{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
+  .mouse-dimensions{
+    position: fixed;
+    pointer-events: none;
+
+    width: 65px;
+    height: 40px;
+
+    opacity: .75;
+    background-color: #000000;
+    border-radius: 3px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    top:50px;
+    left:50%;
+  }
+
+  .mouse-dimension{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .mouse-dimension span{
+    color: #FFFFFF;
+    font-size: 13px;
+    display: block;
+  }
+
+  .hide{
+    display: none;
+  }
+
+  .missing{
+    color: red !important;
+  }

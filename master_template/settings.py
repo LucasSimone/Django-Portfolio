@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'main_site.apps.MainSiteConfig',
     'mailing.apps.MailingConfig',
+    'edm_tool.apps.EdmToolConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

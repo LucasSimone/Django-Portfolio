@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_site.urls')),
     path('mailing/', include('mailing.urls')),
+    path('edm_tool/', include('edm_tool.urls')),
 ]
