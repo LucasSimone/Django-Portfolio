@@ -11,6 +11,8 @@ $( document ).ready(function() {
         //ensure we are not going to overwrite code from the CRM edit
         if(sessionStorage.getItem("code")){
             loadCachedCode();
+        }else{
+            loadDefaultCode();
         }
     
         // If you are coming from replacing on the canvas load the cached data
@@ -75,7 +77,7 @@ $( document ).ready(function() {
         $('#img-src').on('input',function(e){
             if(selectedImage != null){
                 var timeStamp = new Date().getTime();
-                selectedImage.src = "https://joeyai.net" + e.currentTarget.value + "?t=" + timeStamp;
+                selectedImage.src = e.currentTarget.value + "?t=" + timeStamp;
                 updateCode();
             }
         });
@@ -534,12 +536,12 @@ $( document ).ready(function() {
                             //update the image src or add a link to the pdf
                             if(fileType == "image/gif"){
                                 $('#img-src')[0].value = res.result;
-                                selectedImage.src = "https://joeyai.net" + res.result;
+                                selectedImage.src = res.result;
                                 updateCode();
                             }
 
                             if(fileType == "application/pdf"){
-                                $('#img-link')[0].value = "https://joeyai.net" + res.result;
+                                $('#img-link')[0].value = res.result;
                                 updateLink();
                                 updateCode();
                             }
@@ -687,7 +689,7 @@ function select(img){
 
     // Set Img SRC
     //Split the timestamp from the src then remove the first 18 chars(https://joeyai.net)
-    $('#img-src')[0].value = img.src.split('?')[0].slice(18);
+    $('#img-src')[0].value = img.src.split('?')[0];
 
     // Set Slice Link
     if(img.parentElement.tagName == "A"){
@@ -1010,6 +1012,14 @@ function loadCachedCode(){
     initalizeEditor();
 }
 
+async function loadDefaultCode(){
+
+    let html =  await (await fetch('/edm_tool/default-html')).text();
+    $(".edm-container")[0].innerHTML = html;
+
+    initalizeEditor();
+}
+
 function initalizeEditor(){
     $('#edm-title')[0].value = $(".edm-container title")[0].innerHTML;
     $("#main-color-box").css("background",$('table')[0].bgColor);
@@ -1022,3 +1032,4 @@ function initalizeEditor(){
         img.src += "?t=" + timestamp;
     }
 }
+

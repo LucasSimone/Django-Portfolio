@@ -172,7 +172,7 @@ export class MasterSlices{
         for(let i=0; i < jpgArray.length; i++){
 
             //Make Image Name
-            var filename = imageName + '_' + i + '.jpg';
+            var filename = imageName + '_' + String(i).padStart(2, '0') + '.jpg';
             
             zip.file(filename, jpgArray[i], {base64: true});
         }

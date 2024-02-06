@@ -380,6 +380,11 @@ $('.slice-wrap').on('click', function(event){
   reRender();
 });
 
+$('.load-default').on('click', function(event){
+  load_default()
+  reRender();
+});
+
 // CREATION MODE
 // This tool reset/clears the mode of the canvas setting the mode to the default/creation
 $('.creation-mode').on('click', function(event){
@@ -1299,6 +1304,13 @@ $(document).ready(function() {
   
   //If we are in a new session load the default object
   if(sessionStorage.getItem('load_default') == null){
+    load_default();
+    sessionStorage.setItem('load_default',false);
+  }
+ 
+});
+
+function load_default(){
     image.imgClass.src = def_object.image;
     slices.sliceList = def_object.slices;
     $("#main-color")[0].value = def_object.color;
@@ -1315,11 +1327,7 @@ $(document).ready(function() {
         reRender();
       };
     }
-    
-    sessionStorage.setItem('load_default',false)
-  }
- 
-});
+}
 
 async function loadCachedData(){
   try {

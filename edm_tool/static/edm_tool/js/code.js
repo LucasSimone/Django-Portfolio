@@ -439,9 +439,7 @@ addEventListener("keyup", function(event) {
 
 });
 
-
 $( document ).ready(function() {
-
 
         // INIT CODE AREA
         

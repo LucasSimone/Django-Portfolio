@@ -11,6 +11,7 @@ def home(request):
 def code(request):
     context = {
         'title': 'Code',
+        'skeleton': render(request, 'edm_tool/skeleton/edm-skeleton.html'),
     }
     return render(request, 'edm_tool/pages/code.html', context)
 
@@ -28,3 +29,6 @@ def canvas(request):
 
 def skeleton(request):
     return render(request, 'edm_tool/skeleton/edm-skeleton.html')
+
+def default_html(request):
+    return render(request, 'edm_tool/skeleton/default.html')

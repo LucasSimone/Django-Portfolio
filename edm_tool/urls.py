@@ -7,4 +7,5 @@ urlpatterns = [
     path('editor', views.editor, name='edm_tool-editor'),
     path('canvas', views.canvas, name='edm_tool-canvas'),
     path('edm-skeleton', views.skeleton, name='edm_tool-skeleton'),
+    path('default-html', views.default_html, name='edm_tool-default_html'),
 ]
