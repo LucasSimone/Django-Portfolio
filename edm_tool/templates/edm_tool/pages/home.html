@@ -1,23 +1,43 @@
 
 {% extends "edm_tool/master.html"%}
+{% load static %}
+
 {% block content %}
     <div class="container">
-        <h1>Home Page</h1>
+        <h1 class="gradient-header pt-3">Email Creation Tool</h1>
         <div>
-            This is the tool. Instructions on how it works. For a more detailed explination you can click on the info icon in the nav. 
-            start by clicking on CANVAS in the NAV or click here.
+            <h3 class="mt-4">About the Tool</h3>
+            I created this tool while working for Joey Ai to improve the creation of emails. The process for creating emails when I started working at
+            Joey was to use photo shop to slice the email image into it's separate parts. Upload the emails to our hosting server, then create the HTML file. Adding in all the a tags,
+            links, rows and cells within the HTML file. This was time consuming and tedious so I decided to make a web tool to improve the process. 
             <br><br>
-            Not inteded for mobile use. If you are viewing from a mobile device this tool will not diplay or work as intended. 
+            The tool works by first going to the canvas where you can upload your image, slice it into the smaller images you need. You can then add any links, alt tags, slice 
+            colors, etc that are needed. Once finished you can open the export menu, adjust where you want the images to be saved on the sever and generate the HTML. 
             <br><br>
-            If you are in Mozilla the alt key will get in the way of full functionality. There are some setting you can change or view from chrome.
+            It's an easy to use all in one tool that greatly improves the time it takes to create emails from images and allows anyone to create them without having knowledge of HTML.
+
+            <h3 class="mt-4">Instructions & Where to Go</h3>
+            From here I suggest visiting the CANVAS. You can view a sample email I have placed there. You can use it to play around with the functionality or even try 
+            uploading your own image. From the canvas you can generate the HTML through the export icon in the bottom right and view it in the CODE page. Finally if you have 
+            any changes to the already generated HTML you can use the EDITOR to refine your email.
             <br><br>
-            You can upload your own image to the canvas to cut it up add links and even generate the HTML but the images will not be saved anywhere. To play around in the editor
-            please use the default Email image and slices. 
-            <br> <br>
-            If you are using the tool to generate HTML you will need to download the images from the canvas export and host them somewhere. Modifying the img src's in the HTML to point to your hosting location.
+            **I am only hosting the images for the sample EDM I have created so only this will render in the editor. If you generate HTML for new images or under a different image name, 
+            you will need to host them and update the src(s) in the HTML.
             <br><br>
-            There is more functionality with the actual implementation of this tool such as uploading gifs and files, replacing rows with new HTML code and replacing images stored of the server.
-            but this is just a basic demonstration of the tool. Also I dont feel like paying to host all the files if anyone tries to use this tool example in practice.
+            If you are ever stuck or need more information you can click on the <img width="20px" height="20px" src="{% static 'edm_tool/img/icons/circle-info-solid.svg' %}" alt="info">
+            in the top right of the nav to bring up the tool info menu. The info there speaks to the full functionality of the tool, so some sections may not apply to this demo.
+    
+            <h3 class="mt-4">Notes</h3>
+            Notes
+            This demo is not intended for mobile use. If you are viewing from a mobile device this tool will not display or work as intended. 
+            <br><br>
+            If you are in Firefox the alt key will get in the way of the canvas. If you want to change them more information can be found in the nav info.
+            <br><br>
+            If you are using the tool to generate HTML you will need to download the images from the canvas export and host them somewhere. 
+            Then update the img src's in the HTML to point to your hosting location.
+            <br><br>
+            There is more functionality with the actual implementation of this tool such as uploading gifs and PDFs, replacing rows with new HTML code and replacing images stored on the server.
+            but this is just a basic demonstration of the tool.
         </div>
     </div>
     

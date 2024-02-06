@@ -59,10 +59,10 @@
       </div>
 
       <!-- SLICE OPTIONS -->
-      <div class="expand-slice-options">
+      <div class="expand-slice-options hide-import">
         <img src="{% static 'edm_tool/img/icons/expand-solid.svg' %}">
       </div>
-      <div class="slice-code-options hide-import">
+      <div class="slice-code-options">
 
         <div class="option-header">
           <img class="collapse-slice-options" src="{% static 'edm_tool/img/icons/collapse-solid.svg' %}">
@@ -196,6 +196,24 @@
           <div class="inside-border">
             <div class="middle-point"></div>
           </div>
+        </div>
+      </div>
+
+      <div class="movement-tips popup hide-import">
+        <div class="close">X</div>
+        <div class="h-100 w-100 p-4">
+          <h3 class="">How to move the image:</h3>
+          <ul>
+            <li>Hold right click on the canvas and drag your mouse to move the image wherever you like.</li>
+            <li>Scrolling will move the image vertically</li>
+            <li>Hold the shift key + scrolling will move the image horizontally</li>
+            <li>Hold the alt key + scrolling will zoom the image in and out. <small>Note for Mozilla you will need to change a setting in the about:config.</small></li>
+            <li>
+                Zooming in very close to the image will make a grid appear showing you the pixel borders, for precise slice creation.
+                The grid is white by default. If you are having trouble seeing it on a white background EDM you can click the palette in the 
+                <span class="sub-link" data-hash="toolbar">toolbar</span> and it will change the grid color to black.
+            </li>
+          </ul>
         </div>
       </div>
 

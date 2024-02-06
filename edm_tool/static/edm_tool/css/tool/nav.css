@@ -17,7 +17,7 @@
   width: 33.3%;
 
   color: #FFFFFF;
-  font-size: 24px;
+  font-size: clamp(10px, 4vw, 24px);
 
   display: flex;
   justify-content: center;

@@ -499,6 +499,11 @@ $(".slice-export-popup").find(".close").on('click', function(event){
   exportSliceOpen = false;
 });
 
+// CLOSE movement POpUP
+$(".movement-tips").find(".close").on('click', function(event){
+  $(".movement-tips")[0].classList.add("hide-import");
+});
+
 // CLOSE NEW PNG POPUP
 $(".png-upload-popup").find(".close").on('click', function(event){
   $(".png-upload-popup")[0].classList.add("hide-import");
@@ -1305,6 +1310,7 @@ $(document).ready(function() {
   //If we are in a new session load the default object
   if(sessionStorage.getItem('load_default') == null){
     load_default();
+    $(".movement-tips").removeClass("hide-import");
     sessionStorage.setItem('load_default',false);
   }
  
