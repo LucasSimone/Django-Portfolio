@@ -1,0 +1,40 @@
+<html data-bs-theme="dark">
+    <head>
+
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+        <!-- Title -->
+        {% if title %}
+        <title>Main Site - {{title}}</title>
+        {% else %}
+        <title>Main Site</title>
+        {% endif %}
+
+        <!-- Include -->
+        {% include 'negative_news/include/head.html' %} 
+
+    </head>
+
+    <body>
+
+        {% include 'main_site/include/color_wipe.html' %}
+
+        {% include 'negative_news/include/header.html' %} 
+
+
+        <div class="container">
+
+            {% block content %}{% endblock %}
+            
+        </div>
+
+
+
+        {% include 'negative_news/include/scripts.html' %}
+
+    </body>
+
+</html>

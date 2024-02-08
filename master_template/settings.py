@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'main_site.apps.MainSiteConfig',
     'mailing.apps.MailingConfig',
     'edm_tool.apps.EdmToolConfig',
+    'negative_news.apps.NegativeNewsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

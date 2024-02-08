@@ -138,14 +138,14 @@ $( document ).ready(function() {
         });
 
         // Handles when the image color box is clicked
-        $('#img-color-box').on('click',function(e){
-            selectingColor = 1;
-        });
+        // $('#img-color-box').on('click',function(e){
+        //     selectingColor = 1;
+        // });
 
         // Handles when the Main color box is clicked
-        $('#main-color-box').on('click',function(e){
-            selectingColor = 2;
-        });
+        // $('#main-color-box').on('click',function(e){
+        //     selectingColor = 2;
+        // });
 
         //Handles when the image alt tag input is changed
         $('#img-color').on('input',function(e){
@@ -154,8 +154,27 @@ $( document ).ready(function() {
                 td = td.parentElement;
             }
 
+
+            if(e.currentTarget.value == ""){
+                $("#img-color-box").css("background", "repeating-conic-gradient(rgb(128, 128, 128) 0%, rgb(128, 128, 128) 25%, transparent 0%, transparent 50%) 50% center / 10px 10px");
+            }
+
             td.bgColor = '#' + e.currentTarget.value;
             $("#img-color-box").css("background",td.bgColor);
+
+            updateCode();
+        });
+
+        $('#main-color').on('input',function(e){
+
+            $('table')[0].bgColor = '#' + e.currentTarget.value;
+
+            if(e.currentTarget.value == ""){
+                $("#main-color-box").css("background", "repeating-conic-gradient(rgb(128, 128, 128) 0%, rgb(128, 128, 128) 25%, transparent 0%, transparent 50%) 50% center / 10px 10px");
+            }
+            
+            console.log(e.currentTarget.value)
+            $("#main-color-box").css("background", '#' + e.currentTarget.value);
 
             updateCode();
         });
