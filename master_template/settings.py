@@ -159,3 +159,5 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
 DEFAULT_FROM_NAME = "Nebulous Tech"
 DEFAULT_FROM_EMAIL = "discount@nebulous.tech"
+
+NEWS_API_KEY = os.getenv('NEWS_API_KEY')
