@@ -1,0 +1,47 @@
+
+{% extends "news_analysis/master.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    
+
+    {% if articles %}
+
+        <div>Outlook: </div>
+
+
+        <div class="px-3 py-2">
+            <table class="table display" id="articleTable" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Sentiment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in articles %}
+                    <tr>
+                        <th scope="row"> {{ forloop.counter }}</th>
+                        <td><a href="{{ item.url }}" target="_blank">{{ item.source.name }}</a></td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.ai_analysis }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <span>Sorry there was an error.</span>
+    {% endif %}
+
+    <script>
+        let table = new DataTable('#articleTable');
+        $('#articleTable_length select').css('background-color', 'var(--bs-body-bg)')
+    </script>
+{% endblock content %}

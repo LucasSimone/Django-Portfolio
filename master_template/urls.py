@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('main_site.urls')),
     path('mailing/', include('mailing.urls')),
     path('edm_tool/', include('edm_tool.urls')),
-    path('negative_news/', include('negative_news.urls')),
+    path('news_analysis/', include('news_analysis.urls')),
+    path('ai_adventure_game/', include('ai_adventure_game.urls')),
 ]

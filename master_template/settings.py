@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'main_site.apps.MainSiteConfig',
     'mailing.apps.MailingConfig',
     'edm_tool.apps.EdmToolConfig',
-    'negative_news.apps.NegativeNewsConfig',
+    'news_analysis.apps.NewsAnalysisConfig',
+    'ai_adventure_game.apps.AiAdventureGameConfig',
+    # 'negative_news.apps.NegativeNewsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,8 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "crispy_forms",
-    "crispy_bootstrap5",
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +139,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CRONJOBS = [
+    ('*/2 * * * *', 'news_analysis.cron.get_daily_news', '>> ' + os.path.join(BASE_DIR,'log/cron.log' + ' 2>&1 '))
+]
+
 # CRIPSY FORMS SETTINGS
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -161,3 +168,4 @@ DEFAULT_FROM_NAME = "Nebulous Tech"
 DEFAULT_FROM_EMAIL = "discount@nebulous.tech"
 
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
+GPT_API_KEY = os.getenv('GPT_API_KEY')

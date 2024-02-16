@@ -12,8 +12,15 @@
           <a class="navbar-brand wipe-transition" href="{% url 'site-home' %}">SIMONE</a>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link wipe-transition" href="{% url 'adventure_game-home' %}">Ai Adventure Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link wipe-transition" href="{% url 'adventure_game-game' %}">Ai Adventure Game</a>
+            </li>
             <li class="nav-item dropdown">
               <div class="nav-item-group">
                 <a class="nav-link wipe-transition" href="{% url 'site-projects' %}" aria-expanded="false">
@@ -24,7 +31,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item wipe-transition" href="{% url 'edm_tool-home' %}">Email Creation Tool</a></li>
-                  <li><a class="dropdown-item wipe-transition" href="{% url 'news_analysis-home' %}">News Analysis</a></li>
+                  <li><a class="dropdown-item wipe-transition" href="{% url 'news_analysis-home' %}">Negative News</a></li>
                   <li><a class="dropdown-item wipe-transition" href="#">Project 3</a></li>
                 </ul>
               </div>
@@ -44,7 +51,6 @@
             <li class="nav-item">
               <a class="nav-link wipe-transition" href="{% url 'site-geolocate' %}">IP Information</a>
             </li>
-            
           </ul>
         </div>
       </div>

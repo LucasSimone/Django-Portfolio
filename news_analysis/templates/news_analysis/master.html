@@ -1,0 +1,40 @@
+<html data-bs-theme="dark">
+    <head>
+
+        <!-- Meta Tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+        <!-- Title -->
+        {% if title %}
+        <title>Simone - {{title}}</title>
+        {% else %}
+        <title>Simone</title>
+        {% endif %}
+
+        <!-- Include -->
+        {% include 'news_analysis/include/head.html' %} 
+
+    </head>
+
+    <body>
+
+        {% include 'main_site/include/color_wipe.html' %}
+
+        {% include 'news_analysis/include/header.html' %} 
+
+
+        <div class="body-wrapper">
+
+            {% block content %}{% endblock %}
+            
+        </div>
+
+        {% include 'main_site/include/footer.html' %} 
+
+        {% include 'news_analysis/include/scripts.html' %}
+
+    </body>
+
+</html>

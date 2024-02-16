@@ -1,0 +1,23 @@
+.navbar .navbar-brand{
+    height: 40px;
+    font-family: var(--def-head-font);
+    font-size: 2.2rem;
+    letter-spacing: 5px;
+    line-height: 110%;
+    padding: 0px;
+
+    background: #12c2e9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(135deg, #f64f59, #c471ed, #12c2e9);
+    background: linear-gradient(135deg, #f64f59, #c471ed, #12c2e9); 
+
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+
+.nav-item-group .nav-link{
+    display: inline-block;
+    width: fit-content;
+}
