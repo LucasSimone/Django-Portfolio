@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import datetime
 
 
 # Create your models here.
@@ -24,4 +25,5 @@ class Article(models.Model):
             title = article_info['title'],
             description = article_info['description'],
             ai_analysis = article_info['ai_analysis'],
+            date_added = article_info['publishedAt'][:10],
         ).save()

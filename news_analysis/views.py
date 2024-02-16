@@ -20,7 +20,27 @@ def analysis(request):
         'title': 'News Analysis',
     }
 
-    context['articles'] = Article.objects.filter(date_added = datetime.datetime.today())
+    yesterday = datetime.date.today() - datetime.timedelta(days=1)
+    today = datetime.date.today()
+
+    context['articles'] = Article.objects.filter(date_added__gte = yesterday, date_added__lte=today)
+    
+    pos=0
+    neg=0
+    for article in context['articles']:
+        print(article)
+        print(article.ai_analysis)
+        if(article.ai_analysis == "POSITIVE"):
+            pos += 1
+        if(article.ai_analysis == "NEGATIVE"):
+            neg += 1
+    if(pos>neg):
+        context['outlook'] = "Positive"
+    elif(neg>pos):
+        context['outlook'] = "Negative"
+    else:
+        context['outlook'] = "Neutral"
+
     # get_daily_news()
 
 
@@ -48,10 +68,9 @@ def get_daily_news():
     if(response['status'] == 'ok'):
         client = OpenAI(api_key=settings.GPT_API_KEY)
         for article in response['articles']:
-
+            print(article['publishedAt'])
             # Check if article already exists based on URL
             if not Article.objects.filter(url=article['url']).exists():
-                print("article does not exist")
                 completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
@@ -61,7 +80,6 @@ def get_daily_news():
                 ])
                 article['ai_analysis'] = completion.choices[0].message.content.upper()
 
-                print(article)
                 Article.save_article(article)
 
     # print("get_daily_news() run at : ", datetime.datetime.now())

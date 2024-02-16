@@ -9,8 +9,13 @@
 
     {% if articles %}
 
-        <div>Outlook: </div>
-
+        <div class="d-flex justify-content-center">
+            <div class="row container my-4 d-md-flex justify-content-between">
+                <div class="col-md-3">Outlook: {{ outlook }}</div>
+                <div class="col-md-3">From: </div>
+                <div class="col-md-3">To: </div>
+            </div>
+        </div>
 
         <div class="px-3 py-2">
             <table class="table display" id="articleTable" data-page-length='10'>
@@ -20,6 +25,7 @@
                         <th scope="col">Source</th>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Sentiment</th>
                     </tr>
                 </thead>
@@ -27,9 +33,10 @@
                 {% for item in articles %}
                     <tr>
                         <th scope="row"> {{ forloop.counter }}</th>
-                        <td><a href="{{ item.url }}" target="_blank">{{ item.source.name }}</a></td>
+                        <td><a href="{{ item.url }}" target="_blank">{{ item.source }}</a></td>
                         <td>{{ item.title }}</td>
                         <td>{{ item.description }}</td>
+                        <td>{{ item.date_added }}</td>
                         <td>{{ item.ai_analysis }}</td>
                     </tr>
                 {% endfor %}
