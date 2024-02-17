@@ -28,8 +28,6 @@ def analysis(request):
     pos=0
     neg=0
     for article in context['articles']:
-        print(article)
-        print(article.ai_analysis)
         if(article.ai_analysis == "POSITIVE"):
             pos += 1
         if(article.ai_analysis == "NEGATIVE"):
@@ -41,7 +39,8 @@ def analysis(request):
     else:
         context['outlook'] = "Neutral"
 
-    # get_daily_news()
+    print(request.GET.get('from_date', ''))
+    print(request.GET.get('to_date', ''))
 
 
     # Get articles from the database with date and return them
