@@ -42,9 +42,9 @@ def analysis(request):
     neg=0
     if context['articles']:
         for article in context['articles']:
-            if(article.ai_analysis == "POSITIVE"):
+            if(article.ai_analysis == "POSITIVE" or article.ai_analysis == "POSITIVE."):
                 pos += 1
-            if(article.ai_analysis == "NEGATIVE"):
+            if(article.ai_analysis == "NEGATIVE" or article.ai_analysis == "NEGATIVE."):
                 neg += 1
         if(pos>neg):
             context['outlook'] = "Positive"

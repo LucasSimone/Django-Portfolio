@@ -66,3 +66,18 @@ input.gradient-button, button.gradient-button, a.gradient-button{
     z-index: 1200;
     cursor: pointer;
 }
+
+
+.mobile-banner{
+    display: none;
+}
+@media only screen and (max-width: 450px) {
+
+    .banner{
+        display: none;
+    }
+
+    .mobile-banner{
+        display: block;
+    }
+}

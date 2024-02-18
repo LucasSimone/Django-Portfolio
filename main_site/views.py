@@ -18,6 +18,12 @@ def projects(request):
     }
     return render(request, 'main_site/pages/projects.html', context)
 
+def gallery(request):
+    context = {
+        'title': 'Gallery',
+    }
+    return render(request, 'main_site/pages/gallery.html', context)
+
 def resume(request):
     context = {
         'title': 'Resume',
