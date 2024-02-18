@@ -27,6 +27,15 @@
 
         <div class="body-wrapper">
 
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert">
+                        {{  message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             {% block content %}{% endblock %}
             
         </div>

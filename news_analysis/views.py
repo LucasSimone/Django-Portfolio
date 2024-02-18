@@ -1,12 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib import messages
 
-from django.conf import settings
 import datetime
-from newsapi import NewsApiClient
-from openai import OpenAI
 
 from .models import Article
+from .forms import ArticleDateForm
 
 def home(request):
     context = {
@@ -16,69 +14,48 @@ def home(request):
     return render(request, 'news_analysis/pages/home.html')
 
 def analysis(request):
+
+    # Default Date range
+    start_date = datetime.date.today() - datetime.timedelta(days=1)
+    end_date = datetime.date.today()
+
     context = {
         'title': 'News Analysis',
+        'article_date_form': ArticleDateForm({'start_date': start_date,'end_date':end_date}),
     }
 
-    yesterday = datetime.date.today() - datetime.timedelta(days=1)
-    today = datetime.date.today()
+    if request.method == 'POST':
+        if 'article_date_form' in request.POST:
+            article_date_form = ArticleDateForm(request.POST)
+            if article_date_form.is_valid():
+                start_date = article_date_form.cleaned_data['start_date']
+                end_date = article_date_form.cleaned_data['end_date']
 
-    context['articles'] = Article.objects.filter(date_added__gte = yesterday, date_added__lte=today)
+                context['article_date_form'] = article_date_form
+
+            else:
+                context['article_date_form'] = article_date_form
+
+    context['articles'] = Article.objects.filter(date_added__gte = start_date, date_added__lte=end_date)
     
     pos=0
     neg=0
-    for article in context['articles']:
-        if(article.ai_analysis == "POSITIVE"):
-            pos += 1
-        if(article.ai_analysis == "NEGATIVE"):
-            neg += 1
-    if(pos>neg):
-        context['outlook'] = "Positive"
-    elif(neg>pos):
-        context['outlook'] = "Negative"
+    if context['articles']:
+        for article in context['articles']:
+            if(article.ai_analysis == "POSITIVE"):
+                pos += 1
+            if(article.ai_analysis == "NEGATIVE"):
+                neg += 1
+        if(pos>neg):
+            context['outlook'] = "Positive"
+        elif(neg>pos):
+            context['outlook'] = "Negative"
+        else:
+            context['outlook'] = "Neutral"
     else:
-        context['outlook'] = "Neutral"
+        context['outlook'] = "None"
 
-    print(request.GET.get('from_date', ''))
-    print(request.GET.get('to_date', ''))
-
-
-    # Get articles from the database with date and return them
 
 
     return render(request, 'news_analysis/pages/analysis.html', context)
 
-
-
-
-def get_daily_news():
-    # Every day we are going to get x articles and analyze them
-    # # Init
-    api = NewsApiClient(api_key=settings.NEWS_API_KEY)
-
-    
-    yesterday = datetime.date.today() - datetime.timedelta(days=1)
-    today = datetime.date.today()
-
-    # Get the top 5 articles of the day
-    response = api.get_everything('bitcoin', None, None, None, None, yesterday, today, 'en', 'popularity', None, 10)
-
-
-    if(response['status'] == 'ok'):
-        client = OpenAI(api_key=settings.GPT_API_KEY)
-        for article in response['articles']:
-            print(article['publishedAt'])
-            # Check if article already exists based on URL
-            if not Article.objects.filter(url=article['url']).exists():
-                completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", 
-                    "content": "You are an expert financial analyst, tasked with reading daily news articles about bitcoin and providing a one word opinion on whether the article positive(meaning the price will increase) or negative(meaning the price will decrease) for bitcoin."},
-                    {"role": "user", "content": article['url']}
-                ])
-                article['ai_analysis'] = completion.choices[0].message.content.upper()
-
-                Article.save_article(article)
-
-    # print("get_daily_news() run at : ", datetime.datetime.now())

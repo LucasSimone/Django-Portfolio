@@ -140,7 +140,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS = [
-    ('*/2 * * * *', 'news_analysis.cron.get_daily_news', '>> ' + os.path.join(BASE_DIR,'log/cron.log' + ' 2>&1 '))
+    ('0 9 * * *', 'news_analysis.cron.get_daily_news', '>> ' + os.path.join(BASE_DIR,'log/cron.log' + ' 2>&1 '))
 ]
 
 # CRIPSY FORMS SETTINGS
