@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'mailing.apps.MailingConfig',
     'edm_tool.apps.EdmToolConfig',
     'news_analysis.apps.NewsAnalysisConfig',
-    'ai_adventure_game.apps.AiAdventureGameConfig',
-    # 'negative_news.apps.NegativeNewsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

@@ -13,7 +13,7 @@ def get_ip(request):
     return ip
 
 def geolocate_ip(ip):
-    url = 'http://ip-api.com/json/' + '72.143.205.140' + '?fields=status,message,country,regionName,city,district,zip,lat,lon,timezone,isp,mobile,proxy'
+    url = 'http://ip-api.com/json/' + ip + '?fields=status,message,country,regionName,city,district,zip,lat,lon,timezone,isp,mobile,proxy'
     response = requests.get(url)
     data = response.json()
 

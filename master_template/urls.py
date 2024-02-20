@@ -23,5 +23,4 @@ urlpatterns = [
     path('mailing/', include('mailing.urls')),
     path('edm_tool/', include('edm_tool.urls')),
     path('news_analysis/', include('news_analysis.urls')),
-    path('ai_adventure_game/', include('ai_adventure_game.urls')),
 ]
