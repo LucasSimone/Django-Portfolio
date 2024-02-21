@@ -29,7 +29,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+# Allowed hosts settings
+if os.getenv('USE_PROD_HOSTS', '') == 'True':  # Use production allowed hosts
+    prod_allowed_hosts = os.getenv('PROD_ALLOWED_HOSTS', 'example.com')
+    ALLOWED_HOSTS = [host.strip() for host in prod_allowed_hosts.split(',')]
+else:  # Use development allowed hosts
+    dev_allowed_hosts = os.getenv('DEV_ALLOWED_HOSTS', 'localhost,127.0.0.1')
+    ALLOWED_HOSTS = [host.strip() for host in dev_allowed_hosts.split(',')]
 
 
 # Application definition
