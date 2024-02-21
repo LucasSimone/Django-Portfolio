@@ -3,7 +3,7 @@
     font-family: var(--def-head-font);
     font-size: 2.7rem;
     letter-spacing: 8px;
-    line-height: 110%;
+    line-height: 40px;
     padding: 0px;
 
     background: #12c2e9;  /* fallback for old browsers */
