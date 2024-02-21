@@ -45,7 +45,7 @@ def references(request):
 
 def geolocate(request):
     context = {
-        'title': 'Geolocate',
+        'title': 'Geolocation',
     }
 
     ip = get_ip(request)
@@ -76,11 +76,11 @@ def contact(request):
                 send_mail(
                     "Feedback from: " + form.cleaned_data['email'],
                     body,
-                    'newmessage@nebulous.tech',
+                    'newmessage@lucassimone.com',
                     ['lucas.simone.careers@gmail.com'],
                 )
 
-                messages.success(request, f"Your message has been recived and I will get back to you as soon as possible. Thank you, I'm looking forward to connecting with you. - Lucas")
+                messages.success(request, f"Your message has been received and I will get back to you as soon as possible. Thank you, I'm looking forward to connecting with you. - Lucas")
                 return redirect('site-contact')
             else:
                 context['form'] = form
