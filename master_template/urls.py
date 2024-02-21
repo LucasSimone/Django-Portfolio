@@ -24,3 +24,5 @@ urlpatterns = [
     path('edm_tool/', include('edm_tool.urls')),
     path('news_analysis/', include('news_analysis.urls')),
 ]
+
+handler404 = 'main_site.views.page_not_found'
