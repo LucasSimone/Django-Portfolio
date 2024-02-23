@@ -63,8 +63,9 @@ textarea{
 }
 
 .slice-code-options .option-header{
-  position: fixed;
-  width: calc(30% - 4px);
+  /* position: fixed; */
+  /* width: calc(30% - 4px); */
+  width: 100%;
   min-width: calc(375px-4px);
   max-width: calc(575px-4px);
   height: 50px;
@@ -480,3 +481,4 @@ div.row textarea{
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
+

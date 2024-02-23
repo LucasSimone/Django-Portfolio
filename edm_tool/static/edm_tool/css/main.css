@@ -83,3 +83,7 @@ input.gradient-button, button.gradient-button, a.gradient-button{
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
+
+.mobile-container{
+    background-color: #dcdcdc;
+}

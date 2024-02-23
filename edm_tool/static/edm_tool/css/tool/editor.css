@@ -91,7 +91,8 @@
 
     padding: 10px;
 
-    font-size: 22px;
+    /* font-size: 22px; */
+    font-size: clamp(15px,2vw,22px);
 
     background-color: #000000;
     color: #FFFFFF;
