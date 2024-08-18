@@ -1,18 +1,19 @@
 from django.forms import ModelForm
+from django.urls import reverse_lazy
 from django import forms
+
+from .utils import recaptcha_is_valid
 
 from crispy_forms.helper import FormHelper
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from crispy_forms.layout import Layout, Fieldset, Submit, Field, Div
 
+
 from .models import Feedback
 
 class FeedbackForm(ModelForm):
 
-    # content = forms.CharField(widget=forms.Textarea,)
-    # # label_2 uses a widget with custom attribute(s)
-    # label_2 = forms.CharField(label='label2', widget=forms.TextInput(attrs={'readonly': 'readonly'}))
-    # label_3 = forms.CharField(label='label3',help_text='This is help text', widget=forms.Textarea)
+    recaptcha = forms.CharField(label='',required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,11 +22,25 @@ class FeedbackForm(ModelForm):
             FloatingField("name"),
             FloatingField("email"),
             Field('content', placeholder="Message"),
-            Div(Submit('contact_form', 'Submit', css_class='gradient-button'),css_class='d-flex justify-content-end'),
+            Field('recaptcha', css_class='d-none'),
+            Div(Submit('contact_form', 'SUBMIT', css_class='gradient-button'),css_class='d-flex justify-content-end'),
         )
         self.helper.form_method = "POST"
+        self.helper.form_action = 'site-contact'
+        self.helper.form_id = 'contact'
+        self.helper.attrs = {'data-recaptcha-action': 'contact'}
         self['content'].label = ''
 
     class Meta:
         model = Feedback
         fields = ['name','email','content']
+
+    def clean_recaptcha(self):
+
+        recaptcha = self.cleaned_data['recaptcha']
+
+        if not recaptcha_is_valid(recaptcha):
+            raise forms.ValidationError("The reCAPTCHA validation failed. Please try again.")
+
+        return recaptcha
+

@@ -36,7 +36,7 @@
     </head>
 
     <body>
-        
+
         <!-- Google Tag Manager (noscript) -->
             <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQT4MKDH"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -68,14 +68,12 @@
   
         {% include 'main_site/include/footer.html' %} 
 
-
         {% include 'main_site/include/scripts.html' %}
 
     </body>
 
     {% if anchor %}
         <script>
-            console.log("REDIRECT")
             $(document).ready(function(){
                 window.location = '#{{ anchor }}'
             });

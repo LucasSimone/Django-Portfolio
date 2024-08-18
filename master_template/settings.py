@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG','False') == "True"
+DEBUG = os.getenv('DEBUG',default='False') == 'True'
 
 # Allowed hosts settings
 if os.getenv('USE_PROD_HOSTS', '') == 'True':  # Use production allowed hosts
@@ -184,6 +184,10 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 
 DEFAULT_FROM_NAME = os.getenv('FROM_NAME')
 DEFAULT_FROM_EMAIL = os.getenv('FROM_EMAIL')
+
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_REQUIRED_SCORE = os.getenv('RECAPTCHA_REQUIRED_SCORE')
 
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 GPT_API_KEY = os.getenv('GPT_API_KEY')

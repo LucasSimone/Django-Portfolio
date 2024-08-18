@@ -45,3 +45,7 @@ h3 a{
 html a{
     color: var(--bs-body-color);
 }
+
+div:has(div.grecaptcha-badge) {
+    display: none;
+}

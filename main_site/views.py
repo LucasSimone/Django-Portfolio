@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 
@@ -64,26 +63,26 @@ def contact(request):
     }
 
     if request.method == 'POST':
-        if 'contact_form' in request.POST:
-            form = FeedbackForm(request.POST)
-            if form.is_valid():
-                # Caputre the IP and save
-                instance = form.save(commit=False)
-                instance.ip_address = get_ip(request)
-                instance.save()
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
 
-                body = "Name: " + form.cleaned_data['name'] + '\n' + "Email: " + form.cleaned_data['email'] + '\n' + "Content: " + form.cleaned_data['content']
-                send_mail(
-                    "Feedback from: " + form.cleaned_data['email'],
-                    body,
-                    'newmessage@lucassimone.com',
-                    ['lucas.simone.careers@gmail.com'],
-                )
+            # Caputre the IP and save
+            instance = form.save(commit=False)
+            instance.ip_address = get_ip(request)
+            instance.save()
 
-                messages.success(request, f"Your message has been received and I will get back to you as soon as possible. Thank you, I'm looking forward to connecting with you. - Lucas")
-                return redirect('site-contact')
-            else:
-                context['form'] = form
+            body = "Name: " + form.cleaned_data['name'] + '\n' + "Email: " + form.cleaned_data['email'] + '\n' + "Content: " + form.cleaned_data['content']
+            send_mail(
+                "Feedback from: " + form.cleaned_data['email'],
+                body,
+                'newmessage@lucassimone.com',
+                ['lucas.simone.careers@gmail.com'],
+            )
+
+            messages.success(request, f"Your message has been received and I will get back to you as soon as possible. Thank you, I'm looking forward to connecting with you. - Lucas")
+            return redirect('site-contact')
+        else:
+            context['form'] = form
 
 
     return render(request, 'main_site/pages/contact.html', context)
